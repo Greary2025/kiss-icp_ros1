@@ -1,11 +1,14 @@
 <?xml version="1.0"?>
 <launch>
   <!-- ROS paramaters -->
-  <arg name="bagfile" default=""/>
+  <!-- <arg name="bagfile" default=""/> -->
+  <arg name="bagfile" default="/home/john/rosbag_list/uploader/uplodaer_VLP16_01.bag"/>
+  <arg name="rate"     default="1.0" />
   <arg name="visualize" default="true"/>
   <arg name="odom_frame" default="odom"/>
   <arg name="base_frame" default=""/>
-  <arg name="topic" default=""/>
+  <!-- <arg name="topic" default=""/> -->
+  <arg name="topic" default="/xcjtcplidar"/>
   <arg name="publish_odom_tf" default="false"/>
 
   <!-- KISS-ICP paramaters -->
@@ -34,7 +37,7 @@
 
   <!-- Rosbag player, if bagfile argument was specified -->
   <group if="$(eval bagfile != '')">
-    <node pkg="rosbag" type="play" name="player" args="$(arg bagfile)" output="screen"/>
+    <node pkg="rosbag" type="play" name="player" args="--rate $(arg rate) --clock $(arg bagfile)" output="screen"/>
   </group>
 
   <!-- Visualizer -->
